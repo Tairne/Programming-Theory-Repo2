@@ -5,7 +5,25 @@ using UnityEngine.UIElements;
 
 public class MenuHandler : MonoBehaviour
 {
-    public static string PlayerName = "name";
+    private static string playerName = "name";
+
+    public static string PlayerName
+    {
+        get => playerName;
+        set
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                playerName = "name";
+            }
+            else
+            {
+                // Ограничиваем длину 8 символами
+                playerName = value.Length > 8 ? value.Substring(0, 8) : value;
+            }
+        }
+    }
+
     public TMP_InputField nameField;
 
     public void StartGame()
