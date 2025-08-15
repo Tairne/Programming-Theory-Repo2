@@ -3,10 +3,13 @@ using UnityEngine;
 public class GoodGhost : Ghost
 {
     [SerializeField] private float speed = 2.0f;
+    [SerializeField] private int health = 1;
 
     void Start()
     {
-        SetLabel("Good");
+        HP = health;
+        Name = "Good";
+        SetLabel();
     }
 
     // Update is called once per frame

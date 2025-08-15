@@ -24,7 +24,8 @@ public class FireController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ghost"))
         {
-            Destroy(other.gameObject);
+            var ghost = other.gameObject.GetComponent<Ghost>();
+            ghost.ReceiveDamage();
             Destroy(gameObject);
         }
     }
