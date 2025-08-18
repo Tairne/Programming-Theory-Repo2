@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private GameManager gameManager;
 
     private float maxRotation = 90f; // half range (90° left, 90° right)
     private float startYRotation; // starting angle
@@ -58,6 +59,11 @@ public class Player : MonoBehaviour
         healthBar.SetHealth(currentHealth, maxHealth);
 
         SetHPText();
+
+        if (currentHealth == 0)
+        {
+            gameManager.GameOver();
+        }
     }
 
     public void Heal(int amount)
