@@ -16,4 +16,13 @@ public class BadGhost : Ghost
     {
         GoToPlayer();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerScript.TakeDamage(2);
+            Destroy(gameObject);
+        }
+    }
 }

@@ -1,18 +1,27 @@
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float turnSpeed = 90.0f;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private TextMeshProUGUI healthText;
+
     private float maxRotation = 90f; // half range (90° left, 90° right)
     private float startYRotation; // starting angle
+    private int currentHealth;
 
     public GameObject projectilePrefab;
+    public int maxHealth = 10;
 
     void Start()
     {
         startYRotation = transform.eulerAngles.y;
         GetComponent<WorldSpaceLabel>().SetLabel(MenuHandler.PlayerName);
+        currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth, maxHealth);
+        SetHPText();
     }
 
     void Update()
@@ -41,11 +50,28 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void TakeDamage(int amount)
     {
-        if (!collision.gameObject.CompareTag("Player"))
-        {
-            Destroy(collision.gameObject);
-        }
+        currentHealth -= amount;
+        if (currentHealth < 0) currentHealth = 0;
+
+        healthBar.SetHealth(currentHealth, maxHealth);
+
+        SetHPText();
+    }
+
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+
+        healthBar.SetHealth(currentHealth, maxHealth);
+
+        SetHPText();
+    }
+
+    private void SetHPText()
+    {
+        healthText.text = $"HP {currentHealth} / {maxHealth}";
     }
 }

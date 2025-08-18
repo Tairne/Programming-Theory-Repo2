@@ -17,4 +17,13 @@ public class GoodGhost : Ghost
     {
         GoToPlayer(speed);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerScript.Heal(1);
+            Destroy(gameObject);
+        }
+    }
 }

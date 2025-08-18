@@ -34,4 +34,13 @@ public class Poltergaste : Ghost
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerScript.TakeDamage(1);
+            Destroy(gameObject);
+        }
+    }
 }
