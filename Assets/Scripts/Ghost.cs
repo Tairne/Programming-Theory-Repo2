@@ -7,6 +7,8 @@ public class Ghost : MonoBehaviour
     [SerializeField] protected ParticleSystem explosionEffect;
     [SerializeField] protected AudioClip hurtSound;
     [SerializeField] protected AudioClip deathSound;
+
+    // ENCAPSULATION
     protected int HP { get; set; } = 1;
     protected string Name { get; set; } = "Ghost";
 
@@ -39,6 +41,7 @@ public class Ghost : MonoBehaviour
         }
     }
 
+    // POLYMORPHISM
     public virtual void ReceiveDamage()
     {
         if (HP > 1)

@@ -14,12 +14,6 @@ public class GameManager : MonoBehaviour
         musicSource = Camera.main.GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void GameOver()
     {
         isGameActive = false;

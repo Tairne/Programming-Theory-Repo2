@@ -16,6 +16,7 @@ public class WorldSpaceLabel : MonoBehaviour
     {
         cam = Camera.main;
 
+        // ABSTRACTION
         GameObject canvasObj = CreateCanvas();
         CreateTextMeshPro(canvasObj);
     }

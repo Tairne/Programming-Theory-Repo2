@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// INHERITANCE
 public class GoodGhost : Ghost
 {
     [SerializeField] private float speed = 4.0f;

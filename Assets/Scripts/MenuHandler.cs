@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class MenuHandler : MonoBehaviour
 {
+    // ENCAPSULATION
     private static string playerName = "name";
 
     public static string PlayerName

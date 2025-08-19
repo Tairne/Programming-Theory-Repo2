@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// INHERITANCE
 public class Poltergaste : Ghost
 {
     [SerializeField] private float speed = 2f;
@@ -18,6 +19,7 @@ public class Poltergaste : Ghost
         GoToPlayer(speed);
     }
 
+    // POLYMORPHISM
     public override void ReceiveDamage()
     {
         if (shield > 0)

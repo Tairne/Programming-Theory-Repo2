@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// INHERITANCE
 public class BadGhost : Ghost
 {
     [SerializeField] private int health = 3;
