@@ -5,6 +5,8 @@ public class Ghost : MonoBehaviour
     protected GameObject player;
     protected Player playerScript;
     [SerializeField] protected ParticleSystem explosionEffect;
+    [SerializeField] protected AudioClip hurtSound;
+    [SerializeField] protected AudioClip deathSound;
     protected int HP { get; set; } = 1;
     protected string Name { get; set; } = "Ghost";
 
@@ -43,10 +45,12 @@ public class Ghost : MonoBehaviour
         {
             HP--;
             SetLabel();
+            AudioManager.Instance.PlaySFX(hurtSound);
         }
         else
         {
             PlayExplosion();
+            AudioManager.Instance.PlaySFX(deathSound);
             Destroy(gameObject);
         }
     }

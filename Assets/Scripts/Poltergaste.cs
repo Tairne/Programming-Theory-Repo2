@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Poltergaste : Ghost
 {
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float speed = 2f;
     [SerializeField] private int health = 3;
     [SerializeField] private int shield = 1;
 
@@ -37,11 +37,13 @@ public class Poltergaste : Ghost
         {
             HP--;
             SetLabel();
+            AudioManager.Instance.PlaySFX(hurtSound);
         }
         else
         {
-            Destroy(gameObject);
             PlayExplosion();
+            AudioManager.Instance.PlaySFX(deathSound);
+            Destroy(gameObject);   
         }
     }
 

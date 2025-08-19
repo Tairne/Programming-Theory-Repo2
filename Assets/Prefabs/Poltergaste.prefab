@@ -252,7 +252,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 8424594255691598869}
-  speed: 1
+  hurtSound: {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
+  deathSound: {fileID: 8300000, guid: ac6034ade498bb94b87620cdf6eac48b, type: 3}
+  speed: 2
   health: 3
   shield: 1
 --- !u!114 &3199871995231474480

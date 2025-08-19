@@ -8,11 +8,16 @@ public class Player : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private AudioClip healSound;
+    [SerializeField] private AudioClip damageSound;
+    [SerializeField] private AudioClip deathSound;
 
     private float maxRotation = 90f; // half range (90° left, 90° right)
     private float startYRotation; // starting angle
     private int currentHealth;
     private Animator animator;
+    private AudioSource playerAudio;
 
     public GameObject projectilePrefab;
     public int maxHealth = 10;
@@ -20,6 +25,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
         startYRotation = transform.eulerAngles.y;
         GetComponent<WorldSpaceLabel>().SetLabel(MenuHandler.PlayerName);
         currentHealth = maxHealth;
@@ -59,21 +65,27 @@ public class Player : MonoBehaviour
     public void ShootProjectile()
     {
         Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        playerAudio.PlayOneShot(shootSound, 2.0f);
     }
 
     public void TakeDamage(int amount)
     {
+        if (!gameManager.isGameActive)
+            return;
+
         currentHealth -= amount;
 
         if (currentHealth < 0) currentHealth = 0;
 
         healthBar.SetHealth(currentHealth, maxHealth);
         SetHPText();
+        playerAudio.PlayOneShot(damageSound);
 
         if (currentHealth == 0)
         {
-            gameManager.GameOver();
             animator.SetTrigger("Die");
+            playerAudio.PlayOneShot(deathSound);
+            gameManager.GameOver();    
         }
     }
 
@@ -88,6 +100,7 @@ public class Player : MonoBehaviour
 
         healthBar.SetHealth(currentHealth, maxHealth);
         SetHPText();
+        playerAudio.PlayOneShot(healSound);
     }
 
     private void SetHPText()
