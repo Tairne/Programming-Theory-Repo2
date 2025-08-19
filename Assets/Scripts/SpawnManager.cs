@@ -6,8 +6,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     private float spawnRangeX = 10;
     private float spawnPosZ = 30;
-    private float startDelay = 2;
-    private float spawnInterval = 3.0f;
+    private float startDelay = 1;
+    private float spawnInterval = 5.0f;
 
     void Start()
     {

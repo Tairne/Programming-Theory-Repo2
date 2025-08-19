@@ -4,6 +4,7 @@ public class Ghost : MonoBehaviour
 {
     protected GameObject player;
     protected Player playerScript;
+    [SerializeField] protected ParticleSystem explosionEffect;
     protected int HP { get; set; } = 1;
     protected string Name { get; set; } = "Ghost";
 
@@ -22,8 +23,18 @@ public class Ghost : MonoBehaviour
 
     protected void SetLabel ()
     {
-        string label = $"{Name} {HP}";
+        string label = $"{Name} HP: {HP}";
         GetComponent<WorldSpaceLabel>().SetLabel(label);
+    }
+
+    protected void PlayExplosion()
+    {
+        if (explosionEffect != null)
+        {
+            explosionEffect.transform.SetParent(null);
+            explosionEffect.Play();
+            Destroy(explosionEffect.gameObject, explosionEffect.main.duration);
+        }
     }
 
     public virtual void ReceiveDamage()
@@ -35,6 +46,7 @@ public class Ghost : MonoBehaviour
         }
         else
         {
+            PlayExplosion();
             Destroy(gameObject);
         }
     }

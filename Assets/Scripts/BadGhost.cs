@@ -3,6 +3,7 @@ using UnityEngine;
 public class BadGhost : Ghost
 {
     [SerializeField] private int health = 3;
+    [SerializeField] private float speed = 2f;
 
     void Start()
     {
@@ -14,7 +15,7 @@ public class BadGhost : Ghost
     // Update is called once per frame
     void Update()
     {
-        GoToPlayer();
+        GoToPlayer(speed);
     }
 
     private void OnCollisionEnter(Collision collision)

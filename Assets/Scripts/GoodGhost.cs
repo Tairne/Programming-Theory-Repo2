@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GoodGhost : Ghost
 {
-    [SerializeField] private float speed = 2.0f;
+    [SerializeField] private float speed = 4.0f;
     [SerializeField] private int health = 1;
 
     void Start()

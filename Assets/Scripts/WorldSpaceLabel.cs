@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class WorldSpaceLabel : MonoBehaviour
 {
-    public string labelText = "Привет!";
+    private string labelText = "Default";
     public float heightAboveObject = 2f;
     public float scale = 0.01f;
 

@@ -12,12 +12,14 @@ public class Player : MonoBehaviour
     private float maxRotation = 90f; // half range (90° left, 90° right)
     private float startYRotation; // starting angle
     private int currentHealth;
+    private Animator animator;
 
     public GameObject projectilePrefab;
     public int maxHealth = 10;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         startYRotation = transform.eulerAngles.y;
         GetComponent<WorldSpaceLabel>().SetLabel(MenuHandler.PlayerName);
         currentHealth = maxHealth;
@@ -47,32 +49,44 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            if (gameManager.isGameActive)
+            {
+                animator.SetTrigger("Attack01");
+            }
         }
+    }
+
+    public void ShootProjectile()
+    {
+        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
     }
 
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+
         if (currentHealth < 0) currentHealth = 0;
 
         healthBar.SetHealth(currentHealth, maxHealth);
-
         SetHPText();
 
         if (currentHealth == 0)
         {
             gameManager.GameOver();
+            animator.SetTrigger("Die");
         }
     }
 
     public void Heal(int amount)
     {
+        if (!gameManager.isGameActive)
+            return;
+
         currentHealth += amount;
+
         if (currentHealth > maxHealth) currentHealth = maxHealth;
 
         healthBar.SetHealth(currentHealth, maxHealth);
-
         SetHPText();
     }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Poltergaste : Ghost
 {
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed = 1f;
     [SerializeField] private int health = 3;
     [SerializeField] private int shield = 1;
 
@@ -23,6 +23,15 @@ public class Poltergaste : Ghost
         if (shield > 0)
         {
             shield--;
+
+            if (shield == 0)
+            {
+                Transform shieldTransform = transform.Find("Shield");
+                if (shieldTransform != null)
+                {
+                    Destroy(shieldTransform.gameObject);
+                }
+            }
         }
         else if (HP > 1)
         {
@@ -32,6 +41,7 @@ public class Poltergaste : Ghost
         else
         {
             Destroy(gameObject);
+            PlayExplosion();
         }
     }
 
